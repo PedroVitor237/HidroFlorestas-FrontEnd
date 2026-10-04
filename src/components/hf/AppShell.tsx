@@ -55,9 +55,6 @@ export function AppShell({ children, requireGlobalAdmin }: { children: ReactNode
             <span aria-hidden className="grid h-10 w-10 place-items-center rounded-full bg-secondary text-sm font-bold text-muted-foreground">
               {initials(session.user.firstName, session.user.lastName)}
             </span>
-            <Link to="/logout" className="hidden min-h-11 items-center gap-2 rounded-[10px] bg-ochre px-4 text-sm font-semibold text-primary-foreground hover:bg-ochre/90 md:hidden">
-              <LogOut className="h-4 w-4" aria-hidden /> Sair
-            </Link>
           </div>
         </div>
         {labId && ctx && (

@@ -13,6 +13,10 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as LogoutRouteImport } from './routes/logout'
 import { Route as RegisterRouteImport } from './routes/register'
+import { Route as WorkspaceRouteImport } from './routes/workspace'
+import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
+import { Route as DashboardCollectsRouteImport } from './routes/dashboard.collects'
+import { Route as DashboardAdminUsersRouteImport } from './routes/dashboard.admin.users'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -34,18 +38,46 @@ const RegisterRoute = RegisterRouteImport.update({
   path: '/register',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WorkspaceRoute = WorkspaceRouteImport.update({
+  id: '/workspace',
+  path: '/workspace',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardIndexRoute = DashboardIndexRouteImport.update({
+  id: '/dashboard/',
+  path: '/dashboard/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardCollectsRoute = DashboardCollectsRouteImport.update({
+  id: '/dashboard/collects',
+  path: '/dashboard/collects',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardAdminUsersRoute = DashboardAdminUsersRouteImport.update({
+  id: '/dashboard/admin/users',
+  path: '/dashboard/admin/users',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/logout': typeof LogoutRoute
   '/register': typeof RegisterRoute
+  '/workspace': typeof WorkspaceRoute
+  '/dashboard/collects': typeof DashboardCollectsRoute
+  '/dashboard/': typeof DashboardIndexRoute
+  '/dashboard/admin/users': typeof DashboardAdminUsersRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/logout': typeof LogoutRoute
   '/register': typeof RegisterRoute
+  '/workspace': typeof WorkspaceRoute
+  '/dashboard/collects': typeof DashboardCollectsRoute
+  '/dashboard': typeof DashboardIndexRoute
+  '/dashboard/admin/users': typeof DashboardAdminUsersRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +85,42 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/logout': typeof LogoutRoute
   '/register': typeof RegisterRoute
+  '/workspace': typeof WorkspaceRoute
+  '/dashboard/collects': typeof DashboardCollectsRoute
+  '/dashboard/': typeof DashboardIndexRoute
+  '/dashboard/admin/users': typeof DashboardAdminUsersRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/logout' | '/register'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/logout'
+    | '/register'
+    | '/workspace'
+    | '/dashboard/collects'
+    | '/dashboard/'
+    | '/dashboard/admin/users'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/logout' | '/register'
-  id: '__root__' | '/' | '/login' | '/logout' | '/register'
+  to:
+    | '/'
+    | '/login'
+    | '/logout'
+    | '/register'
+    | '/workspace'
+    | '/dashboard/collects'
+    | '/dashboard'
+    | '/dashboard/admin/users'
+  id:
+    | '__root__'
+    | '/'
+    | '/login'
+    | '/logout'
+    | '/register'
+    | '/workspace'
+    | '/dashboard/collects'
+    | '/dashboard/'
+    | '/dashboard/admin/users'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,6 +128,10 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   LogoutRoute: typeof LogoutRoute
   RegisterRoute: typeof RegisterRoute
+  WorkspaceRoute: typeof WorkspaceRoute
+  DashboardCollectsRoute: typeof DashboardCollectsRoute
+  DashboardIndexRoute: typeof DashboardIndexRoute
+  DashboardAdminUsersRoute: typeof DashboardAdminUsersRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -99,6 +164,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RegisterRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/workspace': {
+      id: '/workspace'
+      path: '/workspace'
+      fullPath: '/workspace'
+      preLoaderRoute: typeof WorkspaceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/': {
+      id: '/dashboard/'
+      path: '/dashboard'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof DashboardIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/collects': {
+      id: '/dashboard/collects'
+      path: '/dashboard/collects'
+      fullPath: '/dashboard/collects'
+      preLoaderRoute: typeof DashboardCollectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/admin/users': {
+      id: '/dashboard/admin/users'
+      path: '/dashboard/admin/users'
+      fullPath: '/dashboard/admin/users'
+      preLoaderRoute: typeof DashboardAdminUsersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -107,6 +200,10 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   LogoutRoute: LogoutRoute,
   RegisterRoute: RegisterRoute,
+  WorkspaceRoute: WorkspaceRoute,
+  DashboardCollectsRoute: DashboardCollectsRoute,
+  DashboardIndexRoute: DashboardIndexRoute,
+  DashboardAdminUsersRoute: DashboardAdminUsersRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
